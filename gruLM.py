@@ -33,10 +33,10 @@ label_train = [s[1:] for s in train]
 label_test = [s[1:] for s in test]
 
 print("Pad sequences (samples x time)")
-X_train = sequence.pad_sequences(X_train, maxlen=maxlen)
-X_test = sequence.pad_sequences(X_test, maxlen=maxlen)
-label_train = sequence.pad_sequences(label_train, maxlen=maxlen)
-label_test = sequence.pad_sequences(label_test, maxlen=maxlen)
+X_train = sequence.pad_sequences(X_train, maxlen=maxlen, value=-1.0)
+X_test = sequence.pad_sequences(X_test, maxlen=maxlen, value=-1.0)
+label_train = sequence.pad_sequences(label_train, maxlen=maxlen, value=-1.0)
+label_test = sequence.pad_sequences(label_test, maxlen=maxlen, value=-1.0)
 print('X_train shape:', X_train.shape)
 print('X_test shape:', X_test.shape)
 
