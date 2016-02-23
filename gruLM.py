@@ -33,10 +33,10 @@ label_train = [s[1:] for s in train]
 label_test = [s[1:] for s in test]
 
 print("Pad sequences (samples x time)")
-X_train = sequence.pad_sequences(X_train, maxlen=maxlen, value=-1.0)
-X_test = sequence.pad_sequences(X_test, maxlen=maxlen, value=-1.0)
-label_train = sequence.pad_sequences(label_train, maxlen=maxlen, value=-1.0)
-label_test = sequence.pad_sequences(label_test, maxlen=maxlen, value=-1.0)
+X_train = sequence.pad_sequences(X_train, maxlen=maxlen, padding='post', value=-1.0)
+X_test = sequence.pad_sequences(X_test, maxlen=maxlen, padding='post', value=-1.0)
+label_train = sequence.pad_sequences(label_train, maxlen=maxlen, padding='post', value=-1.0)
+label_test = sequence.pad_sequences(label_test, maxlen=maxlen, padding='post', value=-1.0)
 print('X_train shape:', X_train.shape)
 print('X_test shape:', X_test.shape)
 
@@ -49,30 +49,18 @@ label_test += 1
 print np.max(label_train)
 print np.min(label_train)
 
-
-def get_one_hot(w, nb_word):
-    one_hot = [0] * nb_word
-    if w > 0:
-        one_hot[w-1] = 1
-    return one_hot
-
 # to one-hot for Y
-Y_train = []
-for s in label_train:
-    hot = []
-    for w in s:
-        one_hot = get_one_hot(w, nb_word)
-        hot.append(one_hot)
+Y_train = np.zeros((label_train.shape[0], maxlen, nb_word), dtype=np.bool)
+for i, s in enumerate(label_train):
+    for t, w in enumerate(s):
+        if w > 0:
+            Y_train[i, t, w-1] = 1
 
-    Y_train.append(hot)
-
-Y_test = []
-for s in label_test:
-    hot = []
-    for w in s:
-        one_hot = get_one_hot(w, nb_word)
-        hot.append(one_hot)
-    Y_test.append(hot)
+Y_test = np.zeros((label_test.shape[0], maxlen, nb_word), dtype=np.bool)
+for i, s in enumerate(label_test):
+    for t, w in enumerate(s):
+        if w > 0:
+            Y_test[i, t, w-1] = 1
 
 
 print('Build model...')
