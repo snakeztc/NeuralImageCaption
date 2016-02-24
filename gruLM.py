@@ -8,7 +8,7 @@ from keras.preprocessing import sequence
 import numpy as np
 
 nb_word = 1000
-maxlen = 10  # cut texts after this number of words (among top max_features most common words)
+maxlen = 100  # cut texts after this number of words (among top max_features most common words)
 batch_size = 32
 
 print('Loading data...')
@@ -17,8 +17,8 @@ train, test = imdb.load_data(nb_words=nb_word, test_split=0.2)
 # discard the label since we are training language model
 train = train[0]
 test = test[0]
-train = train[0:100]
-test = test[0:10]
+train = train[0:1000]
+test = test[0:100]
 
 print(len(train), 'train sequences')
 print(len(test), 'test sequences')
@@ -60,7 +60,7 @@ for i, s in enumerate(label_train):
 
 print('Build model...')
 model = Sequential()
-model.add(Embedding(nb_word, 200, input_length=maxlen, mask_zero=True))
+model.add(Embedding(nb_word+1, 200, input_length=maxlen, mask_zero=True)) # due to masking add 1
 model.add(GRU(128, return_sequences=True))  # try using a GRU instead, for fun
 model.add(Dropout(0.2))
 model.add(TimeDistributedDense(nb_word))
