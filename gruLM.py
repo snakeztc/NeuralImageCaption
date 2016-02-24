@@ -20,6 +20,14 @@ test = test[0]
 train = train[0:1000]
 test = test[0:100]
 
+print("Gathering statistics of data")
+train_sent_len = np.mean([len(s) for s in train])
+test_sent_len = np.mean([len(s) for s in test])
+print(train_sent_len, " average train sentence length")
+print(test_sent_len, " average test sentence length")
+
+
+exit()
 print(len(train), 'train sequences')
 print(len(test), 'test sequences')
 
