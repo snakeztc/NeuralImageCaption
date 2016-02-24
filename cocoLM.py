@@ -75,14 +75,6 @@ label_test += 1
 print np.max(label_train)
 print np.min(label_train)
 
-# to one-hot for Y
-Y_train = np.zeros((label_train.shape[0], maxlen, nb_word), dtype=np.bool)
-for i, s in enumerate(label_train):
-    for t, w in enumerate(s):
-        if w > 0:
-            Y_train[i, t, w-1] = 1
-
-
 print('Build model...')
 model = Sequential()
 model.add(Embedding(nb_word+1, 200, input_length=maxlen, mask_zero=True)) # due to masking add 1
@@ -120,8 +112,15 @@ for i_epoch in range(20):
         start_idx = iter_idx * batch_size
         end_idx = np.min([(iter_idx+1) * batch_size, num_samples])
         mini_batch_index = cur_index[start_idx:end_idx]
-        model.fit(X_train[mini_batch_index, :], Y_train[mini_batch_index, :, :], batch_size=batch_size,
-                  nb_epoch=1, verbose=False)
+
+        # to one-hot for Y
+        Y_train = np.zeros((len(mini_batch_index), maxlen, nb_word), dtype=np.bool)
+        for i, s in enumerate(label_train[mini_batch_index, :]):
+            for t, w in enumerate(s):
+                if w > 0:
+                    Y_train[i, t, w-1] = 1
+
+        model.fit(X_train[mini_batch_index, :], Y_train, batch_size=batch_size, nb_epoch=1, verbose=False)
 
     # calculate validation perplexity
     print "Training perplexity is " + str(get_perplexity(model, X_train, label_train))
