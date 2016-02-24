@@ -88,6 +88,13 @@ model.add(Activation('softmax'))
 # try using different optimizers and different optimizer configs
 model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
 
+# to one-hot for Y
+Y_train = np.zeros((label_train.shape[0], maxlen, nb_word), dtype=np.bool)
+for i, s in enumerate(label_train):
+    for t, w in enumerate(s):
+        if w > 0:
+            Y_train[i, t, w-1] = 1
+
 print("Train...")
 nb_epoch = 20
 num_samples = X_train.shape[0]
@@ -115,14 +122,7 @@ for i_epoch in range(20):
         end_idx = np.min([(iter_idx+1) * batch_size, num_samples])
         mini_batch_index = cur_index[start_idx:end_idx]
 
-        # to one-hot for Y
-        Y_train = np.zeros((len(mini_batch_index), maxlen, nb_word), dtype=np.bool)
-        for i, s in enumerate(label_train[mini_batch_index, :]):
-            for t, w in enumerate(s):
-                if w > 0:
-                    Y_train[i, t, w-1] = 1
-
-        model.fit(X_train[mini_batch_index, :], Y_train, batch_size=batch_size, nb_epoch=1, verbose=False)
+        model.fit(X_train[mini_batch_index, :], Y_train[mini_batch_index, :, :], batch_size=batch_size, nb_epoch=1, verbose=False)
 
     # calculate validation perplexity
     print "Training perplexity is " + str(get_perplexity(model, X_train, label_train))
