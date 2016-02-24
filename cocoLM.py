@@ -8,13 +8,13 @@ from nltk.tokenize import word_tokenize
 import numpy as np
 from pycocotools.coco import COCO
 
-dataDir='/Users/Tony/Dropbox/CMU_MLT/CS-11-777/project/coco'
+dataDir='.'
 dataType='val2014'
 annFile = '%s/annotations/captions_%s.json'%(dataDir,dataType)
 caps=COCO(annFile)
 
 anns = caps.loadAnns(caps.getAnnIds())
-val_data = [ann['caption'] for ann in anns[0:100]]
+val_data = [ann['caption'] for ann in anns]
 
 print "Tokenize the data"
 val_data = [word_tokenize(s) for s in val_data]
@@ -34,13 +34,16 @@ for s in val_data:
         index_s.append(vocab.index(w))
     val_indexes.append(index_s)
 
-print val_data[0:10]
+print val_data[0]
 
 print "Validation set has " + str(len(val_data)) + " sentences with max length " + str(maxlen)
 
 batch_size = 32
-train = val_indexes[0:80]
-test = val_indexes[80:100]
+train_size = 5000
+test_size = 1000
+
+train = val_indexes[0:train_size]
+test = val_indexes[train_size:train_size+test_size]
 
 print(len(train), 'train sequences')
 print(len(test), 'test sequences')
