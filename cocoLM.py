@@ -12,9 +12,13 @@ dataDir='.'
 dataType='val2014'
 annFile = '%s/annotations/captions_%s.json'%(dataDir,dataType)
 caps=COCO(annFile)
+train_size = 5000
+test_size = 1000
+
+
 
 anns = caps.loadAnns(caps.getAnnIds())
-val_data = [ann['caption'] for ann in anns]
+val_data = [ann['caption'] for ann in anns[0:train_size+test_size]]
 
 print "Tokenize the data"
 val_data = [word_tokenize(s) for s in val_data]
@@ -39,8 +43,6 @@ print val_data[0]
 print "Validation set has " + str(len(val_data)) + " sentences with max length " + str(maxlen)
 
 batch_size = 32
-train_size = 5000
-test_size = 1000
 
 train = val_indexes[0:train_size]
 test = val_indexes[train_size:train_size+test_size]
@@ -77,8 +79,8 @@ print np.min(label_train)
 
 print('Build model...')
 model = Sequential()
-model.add(Embedding(nb_word+1, 200, input_length=maxlen, mask_zero=True)) # due to masking add 1
-model.add(GRU(128, return_sequences=True))  # try using a GRU instead, for fun
+model.add(Embedding(nb_word+1, 300, input_length=maxlen, mask_zero=True)) # due to masking add 1
+model.add(GRU(512, return_sequences=True))  # try using a GRU instead, for fun
 model.add(Dropout(0.2))
 model.add(TimeDistributedDense(nb_word))
 model.add(Activation('softmax'))
