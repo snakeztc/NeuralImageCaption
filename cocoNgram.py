@@ -13,8 +13,8 @@ annFile = '%s/annotations/captions_%s.json'%(dataDir,dataType)
 caps=COCO(annFile)
 anns = caps.loadAnns(caps.getAnnIds())
 
-train_size = 5000
-test_size = 1000
+train_size = 1000
+test_size = 10
 
 
 
@@ -92,7 +92,7 @@ for i_epoch in range(20):
         start_idx = iter_idx * batch_size
         end_idx = np.min([(iter_idx+1) * batch_size, num_samples])
         mini_batch_index = cur_index[start_idx:end_idx]
-        model.fit(X_train[mini_batch_index, :], Y_train[mini_batch_index], batch_size=batch_size, nb_epoch=1, verbose=False)
+        model.fit(X_train[mini_batch_index, :], Y_train[mini_batch_index, :], batch_size=batch_size, nb_epoch=1, verbose=False)
 
     # calculate validation perplexity
     print "Training perplexity is " + str(get_perplexity(model, X_train, label_test))
