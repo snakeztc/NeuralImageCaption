@@ -96,7 +96,8 @@ for i_epoch in range(20):
 
     # calculate validation perplexity
     print "Training perplexity is " + str(get_perplexity(model, X_train, label_train))
-    print  "Validation perplexity is " + str(get_perplexity(model, X_test, label_test))
+    print "Validation perplexity is " + str(get_perplexity(model, X_test, label_test))
+    model.save_weights(str(i_epoch)+'-model.h5')
 
 
 
