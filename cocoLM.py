@@ -13,8 +13,8 @@ dataDir='.'
 dataType='val2014'
 annFile = '%s/annotations/captions_%s.json'%(dataDir,dataType)
 caps=COCO(annFile)
-train_size = 5000
-test_size = 1000
+train_size = 10000
+test_size = 10
 
 
 
@@ -45,6 +45,7 @@ print "Validation set has " + str(len(val_data)) + " sentences with max length "
 
 batch_size = 32
 
+# shuffle the data so evenly distribtued
 train = val_indexes[0:train_size]
 test = val_indexes[train_size:train_size+test_size]
 
