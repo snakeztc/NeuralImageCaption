@@ -59,8 +59,8 @@ for i, w in enumerate(label_train):
 
 print('Build model...')
 model = Sequential()
-model.add(Embedding(nb_word, 300, input_length=maxlen, mask_zero=False)) # due to masking add 1
-model.add(GRU(512, return_sequences=False))  # try using a GRU instead, for fun
+model.add(Embedding(nb_word, 100, input_length=maxlen, mask_zero=False)) # due to masking add 1
+model.add(GRU(256, return_sequences=False))  # try using a GRU instead, for fun
 model.add(Dropout(0.2))
 model.add(Dense(nb_word))
 model.add(Activation('softmax'))
@@ -95,7 +95,7 @@ for i_epoch in range(20):
         model.fit(X_train[mini_batch_index, :], Y_train[mini_batch_index, :], batch_size=batch_size, nb_epoch=1, verbose=False)
 
     # calculate validation perplexity
-    print "Training perplexity is " + str(get_perplexity(model, X_train, label_test))
+    print "Training perplexity is " + str(get_perplexity(model, X_train, label_train))
     print  "Validation perplexity is " + str(get_perplexity(model, X_test, label_test))
 
 

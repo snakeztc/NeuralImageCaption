@@ -12,10 +12,10 @@ class CorpusFactory(object):
         label_test = [s[1:] for s in test]
 
         print("Pad sequences (samples x time)")
-        X_train = sequence.pad_sequences(X_train, maxlen=maxlen, padding='post', value=-1.0)
-        X_test = sequence.pad_sequences(X_test, maxlen=maxlen, padding='post', value=-1.0)
-        label_train = sequence.pad_sequences(label_train, maxlen=maxlen, padding='post', value=-1.0)
-        label_test = sequence.pad_sequences(label_test, maxlen=maxlen, padding='post', value=-1.0)
+        X_train = sequence.pad_sequences(X_train, maxlen=maxlen, padding='pre', value=-1.0)
+        X_test = sequence.pad_sequences(X_test, maxlen=maxlen, padding='pre', value=-1.0)
+        label_train = sequence.pad_sequences(label_train, maxlen=maxlen, padding='pre', value=-1.0)
+        label_test = sequence.pad_sequences(label_test, maxlen=maxlen, padding='pre', value=-1.0)
 
         # add 1 so that words are from 1 to N and 0 is mask
         X_train += 1
