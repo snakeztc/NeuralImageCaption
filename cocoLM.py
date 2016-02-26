@@ -13,12 +13,12 @@ dataDir='.'
 dataType='val2014'
 annFile = '%s/annotations/captions_%s.json'%(dataDir,dataType)
 caps=COCO(annFile)
-train_size = 10000
-test_size = 10
-
-
 
 anns = caps.loadAnns(caps.getAnnIds())
+
+train_size = int(len(anns)*0.8)
+test_size = len(anns) - train_size
+
 val_data = [ann['caption'] for ann in anns[0:train_size+test_size]]
 
 print "Tokenize the data"
@@ -109,6 +109,7 @@ for i_epoch in range(20):
     # calculate validation perplexity
     print "Training perplexity is " + str(get_perplexity(model, X_train, label_train))
     print  "Validation perplexity is " + str(get_perplexity(model, X_test, label_test))
+    model.save_weights('./models/'+str(i_epoch)+'-gru.h5')
 
 
 
