@@ -6,7 +6,7 @@ from keras.datasets import imdb
 from corpusFactory import CorpusFactory
 import numpy as np
 
-nb_word = 1000
+nb_word = 5000
 ngram = 4  # cut texts after this number of words (among top max_features most common words)
 batch_size = 32
 train_size = 5000

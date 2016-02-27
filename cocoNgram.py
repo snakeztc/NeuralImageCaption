@@ -13,10 +13,8 @@ annFile = '%s/annotations/captions_%s.json'%(dataDir,dataType)
 caps=COCO(annFile)
 anns = caps.loadAnns(caps.getAnnIds())
 
-train_size = 1000
-test_size = 10
-
-
+train_size = 5000
+test_size = 1000
 
 val_data = [ann['caption'] for ann in anns[0:train_size+test_size]]
 
@@ -69,7 +67,7 @@ model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
 
 
 print("Train...")
-nb_epoch = 20
+nb_epoch = 50
 num_samples = X_train.shape[0]
 cur_index = np.arange(num_samples)
 nb_batches = int(np.ceil(num_samples / float(batch_size)))
@@ -86,7 +84,7 @@ def get_perplexity(m, X, label):
     return pow(2, -1 * sum_neg_prob/num_tokens)
 
 
-for i_epoch in range(20):
+for i_epoch in range(nb_epoch):
     print 'Epoch ' + str(i_epoch)
     # shuffle data
     np.random.shuffle(cur_index)
