@@ -6,6 +6,13 @@ class CorpusFactory(object):
 
     @staticmethod
     def next_token_prediction(train, test, maxlen, nb_word):
+        """
+        :param train: (num_sent, sent_len) index from 0 to nb_word - 1
+        :param test: (num_sent, sent_len) index from 0 to nb_word - 1
+        :param maxlen: max_sent length
+        :param nb_word: nb_words
+        :return: data in train and test with index from 0 to nb_word + 1 (nb_word + 1) is BOS (total nb_word+2 token type)
+        """
         (X_train, label_train) = CorpusFactory.get_next_token(train, maxlen, nb_word)
         (X_test, label_test) = CorpusFactory.get_next_token(test, maxlen, nb_word)
         return X_train, label_train, X_test, label_test

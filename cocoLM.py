@@ -16,7 +16,7 @@ caps=COCO(annFile)
 
 anns = caps.loadAnns(caps.getAnnIds())
 
-train_size = 100
+train_size = 1000
 test_size = 10
 
 val_data = [ann['caption'] for ann in anns[0:train_size+test_size]]
@@ -56,15 +56,15 @@ print('Sorting the training data in ascending length')
 train = sorted(train, lambda x,y: 1 if len(x)>len(y) else -1 if len(x)<len(y) else 0)
 
 
-(X_train, label_train, X_test, label_test) = CorpusFactory.next_token_prediction(train, test, maxlen)
+(X_train, label_train, X_test, label_test) = CorpusFactory.next_token_prediction(train, test, maxlen, nb_word)
 
 print np.max(label_train)
 print np.min(label_train)
 
 print('Build model...')
 model = Sequential()
-model.add(Embedding(nb_word+1, 300, input_length=maxlen, mask_zero=True)) # due to masking add 1
-model.add(GRU(512, return_sequences=True))  # try using a GRU instead, for fun
+model.add(Embedding(nb_word+2, 100, input_length=maxlen, mask_zero=True)) # due to masking add 1 and BOS
+model.add(GRU(256, return_sequences=True))
 model.add(Dropout(0.2))
 model.add(TimeDistributedDense(nb_word))
 model.add(Activation('softmax'))
@@ -90,8 +90,10 @@ def get_perplexity(m, X, label):
     sum_neg_prob = 0.0
     for i, s in enumerate(label):
         for t, w in enumerate(s):
-            sum_neg_prob += np.log2(prob[i, t, w-1])
-            num_tokens += 1
+            if w > 0:
+                sum_neg_prob += np.log2(prob[i, t, w-1])
+                num_tokens += 1
+    print "Number tokens " + str(num_tokens)
     return pow(2, -1 * sum_neg_prob/num_tokens)
 
 

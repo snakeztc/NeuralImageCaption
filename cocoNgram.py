@@ -82,6 +82,7 @@ def get_perplexity(m, X, label):
     for i, w in enumerate(label):
         sum_neg_prob += np.log2(prob[i, w])
         num_tokens += 1
+    print "Number tokens " + str(num_tokens)
     return pow(2, -1 * sum_neg_prob/num_tokens)
 
 
@@ -98,7 +99,7 @@ for i_epoch in range(20):
     # calculate validation perplexity
     print "Training perplexity is " + str(get_perplexity(model, X_train, label_train))
     print "Validation perplexity is " + str(get_perplexity(model, X_test, label_test))
-    model.save_weights('./models/'+str(i_epoch)+'-model.h5')
+    model.save_weights('./models/'+str(i_epoch)+'-ngram.h5')
 
 
 
