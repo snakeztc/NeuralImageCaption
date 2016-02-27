@@ -2,54 +2,37 @@ from keras.models import Sequential
 from keras.layers.core import Dropout, Activation, Dense
 from keras.layers.embeddings import Embedding
 from keras.layers.recurrent import GRU
-from nltk.tokenize import word_tokenize
+from keras.datasets import imdb
 from corpusFactory import CorpusFactory
 import numpy as np
-from pycocotools.coco import COCO
 
-dataDir='.'
-dataType='val2014'
-annFile = '%s/annotations/captions_%s.json'%(dataDir,dataType)
-caps=COCO(annFile)
-anns = caps.loadAnns(caps.getAnnIds())
-
-train_size = 1000
-test_size = 10
-
-
-
-val_data = [ann['caption'] for ann in anns[0:train_size+test_size]]
-
-print "Tokenize the data"
-val_data = [word_tokenize(s) for s in val_data]
-maxlen = np.max([len(s) for s in val_data])
-ngram = 4
-
-# get vocabulary
-vocab = list(sorted(set(w for s in val_data for w in s)))
-nb_word = len(vocab)
-
-print "Validation data has a vocab size " + str(len(vocab))
-
-# convert the data to index
-val_indexes = []
-for s in val_data:
-    index_s = []
-    for w in s:
-        index_s.append(vocab.index(w))
-    val_indexes.append(index_s)
-
-print val_data[0]
-
-print "Validation set has " + str(len(val_data)) + " sentences with max length " + str(maxlen)
-
+nb_word = 1000
+ngram = 4  # cut texts after this number of words (among top max_features most common words)
 batch_size = 32
+train_size = 5000
+test_size = 1000
 
-train = val_indexes[0:train_size]
-test = val_indexes[train_size:train_size+test_size]
+print('Loading data...')
+train, test = imdb.load_data(nb_words=nb_word, test_split=0.2)
+
+# discard the label since we are training language model
+train = train[0]
+test = test[0]
+train = train[0:train_size]
+test = test[0:test_size]
+
+print("Gathering statistics of data")
+train_sent_len = np.mean([len(s) for s in train])
+test_sent_len = np.mean([len(s) for s in test])
+print(train_sent_len, " average train sentence length")
+print(test_sent_len, " average test sentence length")
+
 
 print(len(train), 'train sequences')
 print(len(test), 'test sequences')
+
+print('Sorting the training data in ascending length')
+train = sorted(train, lambda x,y: 1 if len(x)>len(y) else -1 if len(x)<len(y) else 0)
 
 (X_train, label_train, X_test, label_test) = CorpusFactory.ngram_prediction(train, test, ngram)
 
