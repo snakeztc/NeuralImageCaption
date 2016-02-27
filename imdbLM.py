@@ -5,11 +5,14 @@ from keras.layers.recurrent import GRU
 from keras.layers.core import TimeDistributedDense
 from keras.datasets import imdb
 from keras.preprocessing import sequence
+from corpusFactory import CorpusFactory
 import numpy as np
 
 nb_word = 1000
 maxlen = 100  # cut texts after this number of words (among top max_features most common words)
 batch_size = 32
+train_size = 5000
+test_size = 1000
 
 print('Loading data...')
 train, test = imdb.load_data(nb_words=nb_word, test_split=0.2)
@@ -17,8 +20,8 @@ train, test = imdb.load_data(nb_words=nb_word, test_split=0.2)
 # discard the label since we are training language model
 train = train[0]
 test = test[0]
-train = train[0:1000]
-test = test[0:100]
+train = train[0:train_size]
+test = test[0:test_size]
 
 print("Gathering statistics of data")
 train_sent_len = np.mean([len(s) for s in train])
@@ -27,33 +30,13 @@ print(train_sent_len, " average train sentence length")
 print(test_sent_len, " average test sentence length")
 
 
-exit()
 print(len(train), 'train sequences')
 print(len(test), 'test sequences')
 
 print('Sorting the training data in ascending length')
 train = sorted(train, lambda x,y: 1 if len(x)>len(y) else -1 if len(x)<len(y) else 0)
 
-print("Creating training data and targets")
-X_train = [s[0:-1] for s in train]
-X_test = [s[0:-1] for s in test]
-label_train = [s[1:] for s in train]
-label_test = [s[1:] for s in test]
-
-print("Pad sequences (samples x time)")
-X_train = sequence.pad_sequences(X_train, maxlen=maxlen, padding='post', value=-1.0)
-X_test = sequence.pad_sequences(X_test, maxlen=maxlen, padding='post', value=-1.0)
-label_train = sequence.pad_sequences(label_train, maxlen=maxlen, padding='post', value=-1.0)
-label_test = sequence.pad_sequences(label_test, maxlen=maxlen, padding='post', value=-1.0)
-print('X_train shape:', X_train.shape)
-print('X_test shape:', X_test.shape)
-
-
-# make index larger be 1-based
-X_train += 1
-X_test += 1
-label_train += 1
-label_test += 1
+(X_train, label_train, X_test, label_test) = CorpusFactory.next_token_prediction(train, test, maxlen)
 
 print np.max(label_train)
 print np.min(label_train)
@@ -68,8 +51,8 @@ for i, s in enumerate(label_train):
 
 print('Build model...')
 model = Sequential()
-model.add(Embedding(nb_word+1, 200, input_length=maxlen, mask_zero=True)) # due to masking add 1
-model.add(GRU(128, return_sequences=True))  # try using a GRU instead, for fun
+model.add(Embedding(nb_word+1, 100, input_length=maxlen, mask_zero=True)) # due to masking add 1
+model.add(GRU(256, return_sequences=True))  # try using a GRU instead, for fun
 model.add(Dropout(0.2))
 model.add(TimeDistributedDense(nb_word))
 model.add(Activation('softmax'))
@@ -95,7 +78,7 @@ def get_perplexity(m, X, label):
     return pow(2, -1 * sum_neg_prob/num_tokens)
 
 
-for i_epoch in range(20):
+for i_epoch in range(nb_epoch):
     print 'Epoch ' + str(i_epoch)
     # shuffle data
     np.random.shuffle(cur_index)

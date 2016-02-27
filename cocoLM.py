@@ -16,8 +16,8 @@ caps=COCO(annFile)
 
 anns = caps.loadAnns(caps.getAnnIds())
 
-train_size = int(len(anns)*0.8)
-test_size = len(anns) - train_size
+train_size = 100
+test_size = 10
 
 val_data = [ann['caption'] for ann in anns[0:train_size+test_size]]
 
