@@ -51,7 +51,7 @@ test = val_indexes[train_size:train_size+test_size]
 print(len(train), 'train sequences')
 print(len(test), 'test sequences')
 
-(X_train, label_train, X_test, label_test) = CorpusFactory.ngram_prediction(train, test, ngram)
+(X_train, label_train, X_test, label_test) = CorpusFactory.ngram_prediction(train, test, ngram, nb_word)
 
 Y_train = np.zeros((label_train.shape[0], nb_word), dtype=np.bool)
 for i, w in enumerate(label_train):
@@ -60,7 +60,7 @@ for i, w in enumerate(label_train):
 
 print('Build model...')
 model = Sequential()
-model.add(Embedding(nb_word, 100, input_length=ngram, mask_zero=False)) # due to masking add 1
+model.add(Embedding(nb_word+1, 100, input_length=ngram, mask_zero=False)) # due to masking add 1
 model.add(GRU(256, return_sequences=False))  # try using a GRU instead, for fun
 model.add(Dropout(0.2))
 model.add(Dense(nb_word))
