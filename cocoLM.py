@@ -97,12 +97,12 @@ def get_perplexity(m, X, label):
     return pow(2, -1 * sum_neg_prob/num_tokens)
 
 
-for i_epoch in range(20):
+for i_epoch in range(nb_epoch):
     print 'Epoch ' + str(i_epoch)
     # shuffle data
     np.random.shuffle(cur_index)
     for iter_idx in range(nb_batches):
-        start_idx = iter_idx * batch_size
+        start_idx = iter_idx * batch_sizef
         end_idx = np.min([(iter_idx+1) * batch_size, num_samples])
         mini_batch_index = cur_index[start_idx:end_idx]
 
