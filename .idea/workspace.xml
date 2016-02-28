@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ebfb39a6-0c19-483b-a4cd-5c1c9a31891e" name="Default" comment="modify imdb">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/generateLM.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/coco" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycocotools/_mask.so" afterPath="$PROJECT_DIR$/pycocotools/_mask.so" />
+    <list default="true" id="ebfb39a6-0c19-483b-a4cd-5c1c9a31891e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cocoLM.py" afterPath="$PROJECT_DIR$/cocoLM.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/corpusFactory.py" afterPath="$PROJECT_DIR$/corpusFactory.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generateNgram.py" afterPath="$PROJECT_DIR$/generateNgram.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imdbLM.py" afterPath="$PROJECT_DIR$/imdbLM.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imdbNgram.py" afterPath="$PROJECT_DIR$/imdbNgram.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycocotools/__init__.py" afterPath="$PROJECT_DIR$/pycocotools/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycocotools/_mask.c" afterPath="$PROJECT_DIR$/pycocotools/_mask.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycocotools/_mask.pyx" afterPath="$PROJECT_DIR$/pycocotools/_mask.pyx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycocotools/coco.py" afterPath="$PROJECT_DIR$/pycocotools/coco.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycocotools/cocoeval.py" afterPath="$PROJECT_DIR$/pycocotools/cocoeval.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycocotools/mask.py" afterPath="$PROJECT_DIR$/pycocotools/mask.py" />
     </list>
     <ignored path="lm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -62,7 +49,7 @@
         <entry file="file://$PROJECT_DIR$/cocoLM.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="113" column="58" selection-start-line="113" selection-start-column="1" selection-end-line="113" selection-end-column="58" />
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -73,8 +60,8 @@
       <file leaf-file-name="imdbLM.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/imdbLM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8051948">
-              <caret line="96" column="75" selection-start-line="96" selection-start-column="75" selection-end-line="96" selection-end-column="75" />
+            <state vertical-scroll-proportion="-0.10709117">
+              <caret line="55" column="29" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -86,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/cocoNgram.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="104" />
+              <caret line="64" column="25" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -109,12 +96,12 @@
       <list>
         <option value="$PROJECT_DIR$/textGen.py" />
         <option value="$PROJECT_DIR$/gruLM.py" />
-        <option value="$PROJECT_DIR$/cocoNgram.py" />
         <option value="$PROJECT_DIR$/generateNgram.py" />
         <option value="$PROJECT_DIR$/generateLM.py" />
         <option value="$PROJECT_DIR$/corpusFactory.py" />
-        <option value="$PROJECT_DIR$/cocoLM.py" />
         <option value="$PROJECT_DIR$/imdbNgram.py" />
+        <option value="$PROJECT_DIR$/cocoNgram.py" />
+        <option value="$PROJECT_DIR$/cocoLM.py" />
         <option value="$PROJECT_DIR$/imdbLM.py" />
       </list>
     </option>
@@ -575,7 +562,19 @@
       <option name="project" value="LOCAL" />
       <updated>1456628179434</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="modify imdb">
+      <created>1456674387768</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1456674387768</updated>
+    </task>
+    <task id="LOCAL-00014" summary="merge to standard">
+      <created>1456674632709</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1456674632709</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -584,24 +583,24 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20322818" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2823366" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1752434" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40890124" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962447" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5382476" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40890124" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931727" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5382476" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -638,7 +637,9 @@
     <MESSAGE value="ADD CCO" />
     <MESSAGE value="fix lm bug" />
     <MESSAGE value="add text gen for ngram" />
-    <option name="LAST_COMMIT_MESSAGE" value="add text gen for ngram" />
+    <MESSAGE value="modify imdb" />
+    <MESSAGE value="merge to standard" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge to standard" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -670,7 +671,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="67" column="53" selection-start-line="67" selection-start-column="53" selection-end-line="67" selection-end-column="53" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#0#35#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -891,7 +892,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="67" column="53" selection-start-line="67" selection-start-column="53" selection-end-line="67" selection-end-column="53" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#0#35#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -904,21 +905,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cocoNgram.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="104" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cocoLM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="58" selection-start-line="113" selection-start-column="1" selection-end-line="113" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -932,10 +923,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cocoNgram.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="25" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cocoLM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/imdbLM.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8051948">
-          <caret line="96" column="75" selection-start-line="96" selection-start-column="75" selection-end-line="96" selection-end-column="75" />
+        <state vertical-scroll-proportion="-0.10709117">
+          <caret line="55" column="29" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>

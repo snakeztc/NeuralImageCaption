@@ -53,7 +53,7 @@ for i, s in enumerate(label_train):
 
 print('Build model...')
 model = Sequential()
-model.add(Embedding(nb_word+1, 100, input_length=maxlen, mask_zero=True)) # due to masking add 1
+model.add(Embedding(nb_word+2, 100, input_length=maxlen, mask_zero=True)) # due to masking add 1
 model.add(GRU(256, return_sequences=True))  # try using a GRU instead, for fun
 model.add(Dropout(0.2))
 model.add(TimeDistributedDense(nb_word))
