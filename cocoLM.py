@@ -19,6 +19,7 @@ anns = caps.loadAnns(caps.getAnnIds())
 train_size = 5000
 test_size = 1000
 batch_size = 32
+nb_epoch = 50
 
 val_data = [ann['caption'] for ann in anns[0:train_size+test_size]]
 
@@ -78,7 +79,6 @@ for i, s in enumerate(label_train):
             Y_train[i, t, w-1] = 1
 
 print("Train...")
-nb_epoch = 50
 num_samples = X_train.shape[0]
 cur_index = np.arange(num_samples)
 nb_batches = int(np.ceil(num_samples / float(batch_size)))

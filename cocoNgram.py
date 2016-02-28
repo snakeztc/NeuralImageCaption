@@ -13,15 +13,17 @@ annFile = '%s/annotations/captions_%s.json'%(dataDir,dataType)
 caps=COCO(annFile)
 anns = caps.loadAnns(caps.getAnnIds())
 
-train_size = 1000
-test_size = 10
+train_size = 5000
+test_size = 1000
+ngram = 4
+batch_size = 32
 
 val_data = [ann['caption'] for ann in anns[0:train_size+test_size]]
 
 print "Tokenize the data"
 val_data = [word_tokenize(s) for s in val_data]
 maxlen = np.max([len(s) for s in val_data])
-ngram = 4
+
 
 # get vocabulary
 vocab = list(sorted(set(w for s in val_data for w in s)))
@@ -41,7 +43,6 @@ print val_data[0]
 
 print "Validation set has " + str(len(val_data)) + " sentences with max length " + str(maxlen)
 
-batch_size = 32
 
 train = val_indexes[0:train_size]
 test = val_indexes[train_size:train_size+test_size]
