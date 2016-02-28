@@ -12,6 +12,7 @@ batch_size = 32
 train_size = 5000
 test_size = 500
 nb_epoch = 50
+maxlen = 50
 
 
 print('Loading data...')
@@ -22,6 +23,10 @@ train = train[0]
 test = test[0]
 train = train[0:train_size]
 test = test[0:test_size]
+
+# cut it down to maxlen
+train = [s[0:maxlen] for s in train]
+test = [s[0:maxlen] for s in test]
 
 print("Gathering statistics of data")
 train_sent_len = np.mean([len(s) for s in train])
