@@ -6,11 +6,11 @@ from keras.datasets import imdb
 from corpusFactory import CorpusFactory
 import numpy as np
 
-nb_word = 5000
+nb_word = 4000
 ngram = 4  # cut texts after this number of words (among top max_features most common words)
 batch_size = 32
 train_size = 5000
-test_size = 1000
+test_size = 500
 nb_epoch = 50
 
 
@@ -45,7 +45,7 @@ for i, w in enumerate(label_train):
 
 print('Build model...')
 model = Sequential()
-model.add(Embedding(nb_word, 100, input_length=ngram, mask_zero=False)) # due to masking add 1
+model.add(Embedding(nb_word+1, 100, input_length=ngram, mask_zero=False)) # due to masking add 1
 model.add(GRU(256, return_sequences=False))  # try using a GRU instead, for fun
 model.add(Dropout(0.2))
 model.add(Dense(nb_word))

@@ -8,11 +8,11 @@ from keras.preprocessing import sequence
 from corpusFactory import CorpusFactory
 import numpy as np
 
-nb_word = 5000
-maxlen = 100  # cut texts after this number of words (among top max_features most common words)
+nb_word = 4000
+maxlen = 50  # cut texts after this number of words (among top max_features most common words)
 batch_size = 32
 train_size = 5000
-test_size = 1000
+test_size = 500
 nb_epoch = 50
 
 
