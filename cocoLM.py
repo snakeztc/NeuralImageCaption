@@ -102,7 +102,7 @@ for i_epoch in range(nb_epoch):
     # shuffle data
     np.random.shuffle(cur_index)
     for iter_idx in range(nb_batches):
-        start_idx = iter_idx * batch_sizef
+        start_idx = iter_idx * batch_size
         end_idx = np.min([(iter_idx+1) * batch_size, num_samples])
         mini_batch_index = cur_index[start_idx:end_idx]
 
