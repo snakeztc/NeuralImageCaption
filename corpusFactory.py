@@ -5,18 +5,44 @@ import numpy as np
 class CorpusFactory(object):
 
     @staticmethod
-    def generate_caption(m, nb_caption, maxlen, ngram, nb_word):
+    def generate_ngram_caption(m, nb_caption, maxlen, ngram, vocab):
         print "Begin to generate captions"
-        eos = [nb_word] * ngram
+        eos = np.atleast_2d([len(vocab)] * ngram)
         captions = []
         for i in range(nb_caption):
             c = []
             w = eos
             for t in range(maxlen):
-                nw = m.predict(w, verbose=False)
+                prob = m.predict(w, verbose=False)
+                sample_idx = np.random.choice(a=len(vocab), p=prob.ravel())
+                nw = vocab[sample_idx]
                 c.append(nw)
-                w = nw
-            captions.append(c)
+                w[0, 0:-1] = np.copy(w[0, 1:])
+                w[0, -1] = sample_idx
+            print ' '.join(c)
+            captions.append(' '.join(c))
+        return captions
+
+
+    @staticmethod
+    def generate_lm_caption(m, nb_caption, maxlen, vocab):
+        print "Begin to generate captions"
+        eos = np.atleast_2d(len(vocab)+1)
+        captions = []
+        for i in range(nb_caption):
+            c = []
+            w = eos
+            for t in range(maxlen):
+                prob = m.predict(w, verbose=False)
+                sample_idx = np.random.choice(a=len(vocab), p=prob[0, -1, :])
+                nw = vocab[sample_idx]
+                c.append(nw)
+                temp = np.zeros((1, t+2))
+                temp[0, 0:t+1] = w
+                temp[0, -1] = sample_idx+1
+                w = temp
+            print ' '.join(c)
+            captions.append(' '.join(c))
         return captions
 
     @staticmethod

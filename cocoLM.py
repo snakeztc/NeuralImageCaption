@@ -18,6 +18,7 @@ anns = caps.loadAnns(caps.getAnnIds())
 
 train_size = 5000
 test_size = 1000
+batch_size = 32
 
 val_data = [ann['caption'] for ann in anns[0:train_size+test_size]]
 
@@ -43,7 +44,6 @@ print val_data[0]
 
 print "Validation set has " + str(len(val_data)) + " sentences with max length " + str(maxlen)
 
-batch_size = 32
 
 # shuffle the data so evenly distribtued
 train = val_indexes[0:train_size]
