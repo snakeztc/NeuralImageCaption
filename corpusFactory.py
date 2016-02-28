@@ -5,6 +5,21 @@ import numpy as np
 class CorpusFactory(object):
 
     @staticmethod
+    def generate_caption(m, nb_caption, maxlen, ngram, nb_word):
+        print "Begin to generate captions"
+        eos = [nb_word] * ngram
+        captions = []
+        for i in range(nb_caption):
+            c = []
+            w = eos
+            for t in range(maxlen):
+                nw = m.predict(w, verbose=False)
+                c.append(nw)
+                w = nw
+            captions.append(c)
+        return captions
+
+    @staticmethod
     def next_token_prediction(train, test, maxlen, nb_word):
         """
         :param train: (num_sent, sent_len) index from 0 to nb_word - 1

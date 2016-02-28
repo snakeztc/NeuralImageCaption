@@ -55,7 +55,6 @@ Y_train = np.zeros((label_train.shape[0], nb_word), dtype=np.bool)
 for i, w in enumerate(label_train):
     Y_train[i, w] = 1
 
-
 print('Build model...')
 model = Sequential()
 model.add(Embedding(nb_word+1, 100, input_length=ngram, mask_zero=False)) # due to masking add 1
@@ -64,43 +63,6 @@ model.add(Dropout(0.2))
 model.add(Dense(nb_word))
 model.add(Activation('softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
+model.load_weights('models/')
 
-
-print("Train...")
-nb_epoch = 50
-num_samples = X_train.shape[0]
-cur_index = np.arange(num_samples)
-nb_batches = int(np.ceil(num_samples / float(batch_size)))
-
-
-def get_perplexity(m, X, label):
-    prob = m.predict_proba(X, verbose=False)
-    num_tokens = 0
-    sum_neg_prob = 0.0
-    for i, w in enumerate(label):
-        sum_neg_prob += np.log2(prob[i, w])
-        num_tokens += 1
-    print "Number tokens " + str(num_tokens)
-    return pow(2, -1 * sum_neg_prob/num_tokens)
-
-
-for i_epoch in range(nb_epoch):
-    print 'Epoch ' + str(i_epoch)
-    # shuffle data
-    np.random.shuffle(cur_index)
-    for iter_idx in range(nb_batches):
-        start_idx = iter_idx * batch_size
-        end_idx = np.min([(iter_idx+1) * batch_size, num_samples])
-        mini_batch_index = cur_index[start_idx:end_idx]
-        model.fit(X_train[mini_batch_index, :], Y_train[mini_batch_index, :], batch_size=batch_size, nb_epoch=1, verbose=False)
-
-    # calculate validation perplexity
-    print "Training perplexity is " + str(get_perplexity(model, X_train, label_train))
-    print "Validation perplexity is " + str(get_perplexity(model, X_test, label_test))
-    #print generate_caption(model, 5, maxlen, ngram, nb_word)
-    model.save_weights('./models/'+str(i_epoch)+'-'+str(ngram)+'gram.h5')
-
-
-
-
-
+print CorpusFactory.generate_caption(model, 5, maxlen, ngram, nb_word)
